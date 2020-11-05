@@ -7,6 +7,8 @@ import LinksGroup from './LinksGroup/LinksGroup';
 
 import s from './Sidebar.module.scss';
 
+import * as constant from '../../constants'
+
 const Sidebar = () => (
   <nav className={s.root}>
     <header className={s.logo}>
@@ -58,6 +60,37 @@ const Sidebar = () => (
         ]}
         glyph="components"
       />
+      <LinksGroup
+        header="日報"
+        headerLink="/app/main"
+        glyph="dashboard"
+      />
+      <LinksGroup
+        header={constant.DRIVER}
+        headerLink="/app/driver"
+        glyph="dashboard"
+      />
+      <LinksGroup
+        header={constant.TRUCK}
+        headerLink="/app/truck"
+        glyph="dashboard"
+      />
+      <LinksGroup
+        header={constant.CLIENT}
+        headerLink="/app/client"
+        glyph="dashboard"
+      />
+      <LinksGroup
+        header={constant.ADMINISTOR}
+        headerLink="/app/admin"
+        glyph="dashboard"
+      />
+      <LinksGroup
+        header="売上管理"
+        headerLink="/app/main"
+        glyph="dashboard"
+      />
+
     </ul>
   </nav>
 );

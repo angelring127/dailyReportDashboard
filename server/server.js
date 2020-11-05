@@ -2,7 +2,7 @@ import express from 'express'
 import helmet from 'helmet';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
-import expressJwt from 'express-jwt';
+// import expressJwt from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import schema from '../src/data/schema'
 import dotenv from 'dotenv';
@@ -16,13 +16,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 dotenv.config();
-app.use(
-  expressJwt({
-    secret: config.auth.jwt.secret,
-    credentialsRequired: false,
-    getToken: req => req.cookies.id_token,
-  }),
-);
+// app.use(
+//   expressJwt({
+//     secret: config.auth.jwt.secret,
+//     credentialsRequired: false,
+//     getToken: req => req.cookies.id_token,
+//   }),
+// );
 
 app.post('/login', (req, res) => {
   // replace with real database check in production
@@ -47,19 +47,19 @@ app.post('/login', (req, res) => {
   }
 });
 
-app.use(
-  '/graphql',
-  expressJwt({
-    secret: config.auth.jwt.secret,
-    getToken: req => req.cookies.id_token,
-  }),
-  expressGraphQL(req => ({
-    schema,
-    graphiql: process.env.REACT_APP_NODE_ENV,
-    rootValue: { request: req },
-    pretty: process.env.REACT_APP_NODE_ENV,
-  })),
-);
+// app.use(
+//   '/graphql',
+//   expressJwt({
+//     secret: config.auth.jwt.secret,
+//     getToken: req => req.cookies.id_token,
+//   }),
+//   expressGraphQL(req => ({
+//     schema,
+//     graphiql: process.env.REACT_APP_NODE_ENV,
+//     rootValue: { request: req },
+//     pretty: process.env.REACT_APP_NODE_ENV,
+//   })),
+// );
 
 const PORT = process.env.REACT_APP_PORT || 5000;
 

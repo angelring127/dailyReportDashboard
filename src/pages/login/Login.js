@@ -15,6 +15,7 @@ import s from './Login.module.scss';
 import Widget from '../../components/Widget';
 import Footer from "../../components/Footer";
 import { loginUser } from '../../actions/user';
+import * as common from '../../fetches/common'
 import jwt from 'jsonwebtoken';
 import config from '../../config'
 
@@ -38,22 +39,20 @@ class Login extends React.Component {
     // We check if app runs with backend mode
     if (!config.isBackend && token) return true;
     if (!token) return;
-    const date = new Date().getTime() / 1000;
-    const data = jwt.decode(token);
-    return date < data.exp;
+    return true;
 }
 
   constructor(props) {
     super(props);
 
     this.state = {
-      login: 'user',
+      email: 'user',
       password: 'password',
     };
   }
 
   changeLogin = (event) => {
-    this.setState({login: event.target.value});
+    this.setState({email: event.target.value});
   }
 
   changePassword = (event) => {
@@ -63,7 +62,7 @@ class Login extends React.Component {
   doLogin = (e) => {
     this.props.dispatch(
       loginUser({
-        login: this.state.login,
+        email: this.state.email,
         password: this.state.password,
       }),
     );
